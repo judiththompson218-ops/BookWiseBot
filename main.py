@@ -1,6 +1,5 @@
 import os
 import logging
-import re
 import requests
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
@@ -287,6 +286,7 @@ async def search(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     """Start the bot."""
+    # Build the Application
     application = Application.builder().token(TOKEN).build()
 
     # Register command handlers
@@ -300,7 +300,7 @@ def main():
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, search))
 
     logger.info("Bot is starting...")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
